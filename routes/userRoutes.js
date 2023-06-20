@@ -1,6 +1,6 @@
 const express=require('express')
 const router=express.Router()
-const {getAllUsers,createUser, getUserById, deleteById, update}=require('../controllers/userController')
+const {getAllUsers,createUser, getUserById, deleteById,updateById}=require('../controllers/userController')
 
 router.get('/users',async(req,res)=>{
     await getAllUsers(req,res)
