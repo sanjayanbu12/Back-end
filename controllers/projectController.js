@@ -40,7 +40,7 @@ const getProjectById=async(req,res)=>{
     }
 }
 
-const deleteProject=async(req,res)=>{
+const deleteProjectById=async(req,res)=>{
     const project=await Projects.findById(req.params.id).exec()
     if(!project){
         res.status(404).json({message:`no project is Available in this id: ${req.params.id}`})
@@ -74,6 +74,6 @@ module.exports={
     getAllProjects,
     createProject,
     getProjectById,
-    deleteProject,
+    deleteProjectById,
     updateProjectById
 }

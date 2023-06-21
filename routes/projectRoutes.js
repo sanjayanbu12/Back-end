@@ -1,8 +1,8 @@
 const express=require('express')
 const router=express.Router()
-const {getAllProjects, createProject, getProjectById, updateProjectById, deleteProject}=require('../controllers/projectController')
+const {getAllProjects, createProject, getProjectById, updateProjectById, deleteProjectById }=require('../controllers/projectController')
 
-router.get('/projectsLists',async(req,res)=>{
+router.get('/projectLists',async(req,res)=>{
     await getAllProjects(req,res)
 })
 
@@ -15,7 +15,7 @@ router.get('/getProjectId/:id',async(req,res)=>{
 })
 
 router.delete('/deleteProject/:id',async(req,res)=>{
-    await deleteProject(req,res)
+    await deleteProjectById(req,res)
 })
 
 router.put('/updateProject/:id',async(req,res)=>{
