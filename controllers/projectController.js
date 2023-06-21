@@ -47,7 +47,7 @@ const deleteProjectById=async(req,res)=>{
     }
     try{
         await Projects.deleteOne({_id:req.params.id}).then((data)=>{
-            res.status(200).json({message:`Successfull deleted ${req.parms.id}`})
+            res.status(200).json({message:`Successfull deleted ${req.params.id}`})
         }).catch((error)=>res.status(404).json({error}))
     }
     catch(error){
