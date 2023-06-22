@@ -11,7 +11,7 @@ router.get('/employee',async(req,res)=>{
 })
 
 router.post('./createEmp', async(req,res)=>{
-    await createEmployee(req,res)
+    await createEmployee(req.body,res)
 })
 
 router.post('/createProject',async(req,res)=>{
