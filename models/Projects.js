@@ -1,29 +1,29 @@
 const mongoose = require('mongoose')
 const projectSchema = new mongoose.Schema({
-        projectName:{
+        name:{
             type:String,
             required:true
         },
-        projectOwner:{
+        powner:{
             type:String,
             required:true
         },
-        teamLead:{
+        lead:{
             type:String,
             required:true
         },
-        scrumMaster:{
+        scrum:{
             type:String,
             required:true
         },
-        projectStatus:{
+        status:{
             type:String,
             required:true
         },
-        teamMemeber:{
+        memb:{
             type:[String]
         },
-        projectDescription:{
+        description:{
             type:String
         }
 

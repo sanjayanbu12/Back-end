@@ -10,7 +10,7 @@ router.get('/employee',async(req,res)=>{
     await getEmployee(req,res)
 })
 
-router.post('./createEmp', async(req,res)=>{
+router.post('/createEmp', async(req,res)=>{
     await createEmployee(req.body,res)
 })
 
