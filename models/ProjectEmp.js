@@ -32,4 +32,4 @@ const employeeSchema=new mongoose.Schema({
   {timestamps:true})
 
 
-module.exports=mongoose.model('Employee',employeeSchema)
+module.exports=mongoose.model('ProjectEmp',employeeSchema)

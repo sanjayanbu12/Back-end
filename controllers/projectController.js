@@ -1,7 +1,7 @@
 const Projects=require('../models/Projects')
-const Employee=require('../models/ProjectEmp')
-const mangoose=require('mongoose')
 const ProjectEmp = require('../models/ProjectEmp')
+const mangoose=require('mongoose')
+
 
 const getAllProjects=async(req,res)=>{
     try{
@@ -15,7 +15,7 @@ const getAllProjects=async(req,res)=>{
 
 const getEmployee=async(req,res)=>{
     try{
-        const employee=await Employee.find({})
+        const employee=await ProjectEmp.find({})
         res.status(200).json({employee})
     }
     catch(error){
