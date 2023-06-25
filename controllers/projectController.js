@@ -1,7 +1,7 @@
 const Projects=require('../models/Projects')
 const ProjectEmp = require('../models/ProjectEmp')
 const mangoose=require('mongoose')
-
+const otpgenerator =require('otp-generator')
 
 const getAllProjects=async(req,res)=>{
     try{
