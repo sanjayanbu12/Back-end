@@ -16,7 +16,8 @@ const createTask=async(taskData,res)=>{
    
         const OTP=otpgenerator.generate(4,{
             upperCaseAlphabets:false,
-            specialChars:false
+            specialChars:false,
+            lowerCaseAlphabets:false
         })
         const taskId = 'Task-'+ OTP
     try{

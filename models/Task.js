@@ -6,10 +6,10 @@ const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema(
   {
-    // taskId: {
-    //   type: String,
-    //   unique: true,
-    // },
+    taskId: {
+      type: String,
+      require: true,
+    },
     Project: {
       type: String,
       required: true,
@@ -32,7 +32,7 @@ const taskSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: 'To-Do',
+      default: 'icebox',
     },
     duedate: {
       type: Date,
