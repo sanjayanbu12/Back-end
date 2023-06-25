@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 const taskSchema = new mongoose.Schema(
   {
     taskId: {
-      type: Number
+      type: String,
+      require: true,
     },
     Project: {
       type: String,
