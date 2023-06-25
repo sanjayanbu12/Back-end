@@ -38,9 +38,16 @@ const createEmployee=async(projectEmpData,res)=>{
 }
 
 const createProject=async(projectData,res)=>{
+    const OTP=otpgenerator.generate(4,{
+        upperCaseAlphabets:false,
+        specialChars:false,
+        lowerCaseAlphabets:false
+    })
+    const projectId = 'Project-'+ OTP
+
     try{
         const newProject = new Projects({
-            ...projectData
+            ...projectData,projectId
         })
         await newProject.save().then((data)=>{
             res.status(200).json({data})
