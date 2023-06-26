@@ -45,6 +45,20 @@ const taskSchema = new mongoose.Schema(
     summary: {
       type: String,
     },
+    story:{
+      type : String
+    },
+    deliveryteam:
+    {
+      type : [String]
+
+    },
+    sprint : {
+      type: String
+    },
+    targetrelase: {
+      type: String
+    }
   },
   {
     timestamps: true,
