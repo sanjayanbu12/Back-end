@@ -56,7 +56,7 @@ const taskSchema = new mongoose.Schema(
     sprint : {
       type: String
     },
-    targetrelase: {
+    targetrelease: {
       type: String
     }
   },
