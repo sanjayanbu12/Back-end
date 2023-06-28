@@ -25,8 +25,9 @@ const projectSchema = new mongoose.Schema({
             required:true
         },
         memb:{
-            type:[String]
-        },
+            type:[String],
+            required:true,
+                },
         description:{
             type:String
         }
