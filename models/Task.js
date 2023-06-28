@@ -59,11 +59,11 @@ const taskSchema = new mongoose.Schema(
     targetrelease: {
       type: String
     },
-   type: {
-    type:String,
-    required:true
+  //  type: {
+  //   type:String,
+  //   required:true
     
-    }
+  //   }
   //  pdf: {
   //     data: Buffer,
   //     contentType: String,
