@@ -1,13 +1,13 @@
 const mongoose = require('mongoose')
 const employeeSchema=new mongoose.Schema({
-    name: [{
+    name: {
         type:String,
         default: "Deva"
-    }],
-     role: [{ 
+    },
+     role: { 
             type: String,
             default:"Software Associate"
-        }],
+        },
   },
   {timestamps:true})
 
