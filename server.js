@@ -6,6 +6,7 @@ const connectDB = require('./config/dbConn');
 const userRouter=require('./routes/userRoutes')
 const taskRouter=require('./routes/taskRoutes')
 const projectRouter=require('./routes/projectRoutes')
+const authentication=require('./routes/auth')
 const PORT=process.env.PORT||8080
 //const PORT=5000
 const cors=require('cors')
@@ -18,6 +19,7 @@ app.use(logger('dev'))
 
 connectDB();
 
+app.use('/server/auth',authentication)
 app.use('/api',userRouter)
 app.use('/task',taskRouter)
 app.use('/server',projectRouter)
