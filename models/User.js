@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt=require('bcrypt')
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     username: {
         type: String,
         required:[ true,"provide username"]
@@ -22,13 +22,15 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpire:Date
 })
 
-userSchema.pre('save',async function(next){
-    if(!this.idModefied('password')){
-        next();
+UserSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+      next();
     }
     const salt = await bcrypt.genSalt(10);
-    this.password=await bcrypt.hash(this.password, salt)
+    this.password = await bcrypt.hash(this.password, salt);
     next();
-})
+  });
+  
+const User=mongoose.model('User',UserSchema)//in modal we define
 
-module.exports=mongoose.model('User',userSchema)//in modal we define
+module.exports=User
