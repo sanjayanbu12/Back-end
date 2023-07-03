@@ -46,50 +46,92 @@ const login = async (req, res, next) => {
     }
 }
 
-const forgotpassword = async (req, res, next) => {
-    const {email}=req.body
+// const forgotpassword = async (req, res, next) => {
+//     const {email}=req.body
 
-    try{
-        const user=await User.findOne({email})
+//     try{
+//         const user=await User.findOne({email})
         
-        if(!user){
-            return next(new ErrorResponse("Email could not be sent",404))
-        }
-        const resetToken=user.getResetPasswordToken()
+//         if(!user){
+//             return next(new ErrorResponse("Email could not be sent",404))
+//         }
+//         const resetToken=user.getResetPasswordToken()
 
-        await user.save();
+//         await user.save();
 
-        const resetUrl=`localhost:5000/passwordreset/${resetToken}`
+//         const resetUrl=`localhost:5000/passwordreset/${resetToken}`
 
-        const message = `
-        <h1>You have requested a password reset<h1/>
-        <p>Please go to these link to reset these password<p/>
-        <a href=${resetUrl} clicktracking=off>${resetUrl}<a/>`
+//         const message = `
+//         <h1>You have requested a password reset<h1/>
+//         <p>Please go to these link to reset these password<p/>
+//         <a href=${resetUrl} clicktracking=off>${resetUrl}<a/>`
 
-        try {
+//         try {
 
-            await sendEmail({
-                to:user.email,
-                subject:"Reset Password Request",
-                text:message
-            });
-        res.status(200).json({success:true,data:"Email sent"})
+//             await sendEmail({
+//                 to:user.email,
+//                 subject:"Reset Password Request",
+//                 text:message
+//             });
+//         res.status(200).json({success:true,data:"Email sent"})
 
-        } catch (error) {
+//         } catch (error) {
             
-            user.resetPasswordToken=undefined;
-            user.resetPasswordExpire=undefined;
+//             user.resetPasswordToken=undefined;
+//             user.resetPasswordExpire=undefined;
 
-            await user.save();
+//             await user.save();
 
-            return next(new ErrorResponse("Email could not be send", 500))
+//             return next(new ErrorResponse("Email could not be send", 500))
 
-        }
+//         }
+//     }
+//     catch(error){
+//         next(error);
+//     }
+// }
+
+const forgotpassword = async (req, res, next) => {
+    const { email } = req.body;
+  
+    try {
+      const user = await User.findOne({ email });
+  
+      if (!user) {
+        return next(new ErrorResponse('Email could not be sent', 404));
+      }
+  
+      const resetToken = user.getResetPasswordToken();
+  
+      await user.save();
+  
+      const resetUrl = `http://localhost:5000/passwordreset/${resetToken}`;
+  
+      const message = `
+        <h1>You have requested a password reset<h1/>
+        <p>Please go to this link to reset your password:<p/>
+        <a href="${resetUrl}" clicktracking="off">${resetUrl}<a/>`;
+  
+      try {
+        await sendEmail({
+          to: user.email,
+          subject: 'Reset Password Request',
+          text: message,
+        });
+  
+        res.status(200).json({ success: true, data: 'Email sent' });
+      } catch (error) {
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
+  
+        await user.save();
+  
+        return next(new ErrorResponse('Email could not be sent', 500));
+      }
+    } catch (error) {
+      next(error);
     }
-    catch(error){
-        next(error);
-    }
-}
+  };
 
 const resetpassword = (req, res, next) => {
     res.send('reset password Routes')
