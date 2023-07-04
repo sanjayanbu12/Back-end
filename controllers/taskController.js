@@ -1,6 +1,12 @@
 const Task=require('../models/Task')
 const mongoose=require('mongoose')
 const otpgenerator =require('otp-generator')
+const multer = require('multer');
+
+// Set up storage for uploaded files
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 
 const getAllTasks=async(req,res)=>{
     try {
@@ -13,13 +19,22 @@ const getAllTasks=async(req,res)=>{
 }
 
 const createTask=async(taskData,res)=>{
-   
-        const OTP=otpgenerator.generate(4,{
-            upperCaseAlphabets:false,
-            specialChars:false,
-            lowerCaseAlphabets:false
-        })
-        const taskId = 'Task-'+ OTP
+        var taskId = "1000"
+        
+        //  const task = Task.find({}).sort({_id:-1}).limit(1)
+        //     if((await task).length > 0)
+        //     {
+        //         // let btw = task.taskId.split("-");
+        //         let prevId = task.taskId;
+        //         console.log(task)
+        //         let currentId = prevId+1;
+        //         const taskId = 'Task-'+ currentId
+        //         id = taskId
+        //     }
+        //     else{
+        //         const taskId = 'Task-'+id;
+        //         id=taskId
+        //     }
     try{
       const newTask=new Task({
         ...taskData,
@@ -88,10 +103,39 @@ const updateTaskById=async(req,res)=>{
     }
 }
 
+const savePdf = async (req, res) => {
+    const taskId = req.params.id;
+    console.log(req.file)
+    try {
+      // Find the task document by taskId
+      const task = await Task.findOne({ _id:taskId });
+      if (!task) {
+        return res.status(404).json({ error: 'Task not found' });
+      }
+      if (!req.file) {
+        return res.status(400).json({ error: 'No file uploaded' });
+      }
+      const { buffer, mimetype } = req.file;
+      task.pdf = {
+        data: buffer,
+        contentType: mimetype,
+      };
+      
+      // Save the updated task document
+      await task.save();
+      
+      return res.status(200).json({ message: 'PDF saved successfully' });
+    } catch (error) {
+      console.error('Error saving PDF:', error);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+
 module.exports={
     getAllTasks,
     createTask,
     getTaskById,
     updateTaskById,
-    deleteTaskById
+    deleteTaskById,
+    savePdf
 }

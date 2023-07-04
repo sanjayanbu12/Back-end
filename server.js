@@ -1,5 +1,6 @@
 require("dotenv").config()
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 const app = express();
 const connectDB = require('./config/dbConn');
@@ -16,7 +17,7 @@ const logger=require('morgan')
 app.use(express.json())//parsing 
 app.use(cors())//to handle wrong port number
 app.use(logger('dev'))
-
+app.use(fileUpload())
 connectDB();
 
 app.use('/server/auth',authentication)

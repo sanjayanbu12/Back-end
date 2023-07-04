@@ -8,7 +8,7 @@ const taskSchema = new mongoose.Schema(
   {
     taskId: {
       type: String,
-      require: true,
+      required: true,
     },
     Project: {
       type: String,
@@ -63,11 +63,11 @@ const taskSchema = new mongoose.Schema(
     type:String,
     required:true
     
+    },
+   pdf: {
+      data: Buffer,
+      contentType: String,
     }
-  //  pdf: {
-  //     data: Buffer,
-  //     contentType: String,
-  //   }
   },
   {
     timestamps: true,
