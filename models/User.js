@@ -4,9 +4,13 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const UserSchema = new mongoose.Schema({
-    username: {
+    firstname: {
         type: String,
-        required: [true, "provide username"]
+        required: [true, "provide First Name"]
+    },
+    lastname: {
+        type: String,
+        required: [true, "provide Lastt Name"]
     },
     password: {
         type: String,
