@@ -4,10 +4,11 @@ const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 const app = express();
 const connectDB = require('./config/dbConn');
-const userRouter=require('./routes/userRoutes')
 const taskRouter=require('./routes/taskRoutes')
 const projectRouter=require('./routes/projectRoutes')
 const authentication=require('./routes/auth')
+const getPrivateData=require('./routes/private')
+const errorHandler=require('./middleware/error')
 const PORT=process.env.PORT||8080
 //const PORT=5000
 const cors=require('cors')
@@ -21,9 +22,12 @@ app.use(fileUpload())
 connectDB();
 
 app.use('/server/auth',authentication)
-app.use('/api',userRouter)
 app.use('/task',taskRouter)
 app.use('/server',projectRouter)
+app.use('/server/private',getPrivateData)
+
+app.use(errorHandler)
+
 // always last
 
 
